@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-buff
+spec:
+  selector:
+    app: video-buff
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-buff
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: video-buff
+  template:
+    metadata:
+      labels:
+        app: video-buff
+    spec:
+      containers:
+        - name: video-buff
+          image: video-buff:1.0.0
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: observations-volume
+              mountPath: /srv/data/observations
+      volumes:
+        - name: observations-volume
+          persistentVolumeClaim:
+            claimName: observation-pvc
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: observation-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: video-buff-config
+data:
+  INPUT_VIDEO_CLIP_PATH: /srv/data/observations/videos
+  OUTPUT_VIDEO_CLIP_PATH: /srv/data/observations/clips
+  MERGE_FLOW_FILE_PATH: bash ./dist/merge-flow.sh

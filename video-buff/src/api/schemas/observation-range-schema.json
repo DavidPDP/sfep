@@ -1,0 +1,10 @@
+{
+    "body": {
+        "type": "object",
+        "properties": {
+            "startClipRangeTime": { "type": "number" },
+            "endClipRangeTime": { "type": "number" }
+        },
+        "required": ["startClipRangeTime", "endClipRangeTime"]
+    }
+}
