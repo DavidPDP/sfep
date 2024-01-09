@@ -13,9 +13,10 @@ const MERGE_FLOW_FILE_PATH = process.env.MERGE_FLOW_FILE_PATH;
 const EXEC_FILE = promisify(child_process.exec);
 
 function mergeVideoClips(observationRange: ObservationRange): Promise<string> {
+    const videoPath = OUTPUT_VIDEO_CLIP_PATH + observationRange.videoId + '.mp4';
     const processor_env = {
         inputVideoClipPath: INPUT_VIDEO_CLIP_PATH,
-        outputVideoClipPath: OUTPUT_VIDEO_CLIP_PATH,
+        outputVideoClipPath: videoPath,
         startRange: observationRange.startClipRangeTime.toString(),
         endRange: observationRange.endClipRangeTime.toString()
     };
@@ -25,7 +26,7 @@ function mergeVideoClips(observationRange: ObservationRange): Promise<string> {
         if(result.stderr) {
             throw new ObservationCreationFailedError(MERGE_VIDEO_ERROR + result.stderr);
         }
-        return OUTPUT_VIDEO_CLIP_PATH
+        return videoPath;
     }).catch((error: Error) => {
         throw new ObservationCreationFailedError(EXEC_FILE_ERROR + error.message);
     });

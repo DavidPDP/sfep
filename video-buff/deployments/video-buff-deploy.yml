@@ -63,6 +63,7 @@ kind: ConfigMap
 metadata:
   name: video-buff-config
 data:
+  HOST: 0.0.0.0
   INPUT_VIDEO_CLIP_PATH: /srv/data/observations/videos
   OUTPUT_VIDEO_CLIP_PATH: /srv/data/observations/clips
-  MERGE_FLOW_FILE_PATH: bash ./dist/merge-flow.sh
+  MERGE_FLOW_FILE_PATH: bash ./merge-flow.sh

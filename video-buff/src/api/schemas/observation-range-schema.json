@@ -2,6 +2,10 @@
     "body": {
         "type": "object",
         "properties": {
+            "videoId": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9-]{5,12}$"
+            },
             "startClipRangeTime": { "type": "number" },
             "endClipRangeTime": { "type": "number" }
         },

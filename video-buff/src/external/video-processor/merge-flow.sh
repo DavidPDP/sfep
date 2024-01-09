@@ -20,4 +20,4 @@ sort | \
 
 # Merge .mp4 files avoiding decoding errors
 ffmpeg -loglevel error -err_detect ignore_err -protocol_whitelist file,pipe \
-  -f concat -safe 0 -i pipe: -c copy "$outputVideoClipPath"
+  -f concat -safe 0 -i pipe: -c copy -vn "$outputVideoClipPath"
