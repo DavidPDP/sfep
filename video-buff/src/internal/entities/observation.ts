@@ -1,5 +1,6 @@
 export class ObservationRange {
     constructor(
+        public readonly videoId: string,
         public readonly startClipRangeTime: number,
         public readonly endClipRangeTime: number,
     ) {}

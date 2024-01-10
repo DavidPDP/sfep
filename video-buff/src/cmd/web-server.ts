@@ -8,7 +8,7 @@ async function registerRoutes() {
 }
 
 async function start() {
-    await WEB_SERVER.listen({ port: 3000 });
+    await WEB_SERVER.listen({ host: process.env.HOST, port: 3000 });
 }
 
 export const webServer = {
