@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "31be5553-1641-4b23-8c45-62259af9b914",
+		"name": "video-buff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4892712"
+	},
+	"item": [
+		{
+			"name": "Observation Creation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const prefix = \"mcBigL\";\r",
+							"let counter = pm.globals.get(\"currentVideoIdCounter\");\r",
+							"\r",
+							"if (!counter) {\r",
+							"    pm.globals.set(\"currentVideoIdCounter\", 0);\r",
+							"    counter = 0;\r",
+							"}\r",
+							"\r",
+							"counter = counter + 1;\r",
+							"\r",
+							"pm.globals.set(\"currentVideoIdCounter\", counter);\r",
+							"pm.globals.set(\"currentVideoId\", prefix + counter);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"videoId\": \"{{currentVideoId}}\",\r\n    \"startClipRangeTime\": 1704599065,\r\n    \"endClipRangeTime\": 1704599085\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/observations/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"observations",
+						"create"
+					]
+				},
+				"description": "\n### Create Observation\nThis endpoint allows you to create a new observation.\n\n#### Request Body\n- `videoId` (string, required): The ID of the video for the observation.\n- `startClipRangeTime` (number, required): The start time of the observation clip.\n- `endClipRangeTime` (number, required): The end time of the observation clip.\n\n#### Response\n- Status: 200\n- Body: null\n"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
