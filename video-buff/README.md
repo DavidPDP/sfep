@@ -15,9 +15,17 @@ app relative size = 35.99 MB
 
 ## Performance
 
-Processor: 11th Gen Intel(R) Core(TM) i3-1115G4 @ 3.00GHz 2.90 GHz (2 cores)
-RAM: 8,00 GB (7,65 GB utilizable)
-OS: Windows 11 22H2
+### System Specifications
+- **Processor:** 11th Gen Intel® Core™ i3-1115G4 @ 3.00GHz 2.90 GHz (2 cores)
+- **RAM:** 8.00 GB (7.65 GB usable)
+- **Operating System:** Windows 11 22H2
+
+### Video Merging Scenario
+- **Number of Video Clips:** 21
+- **Format:** .mp4
+- **Average Size per Clip:** 1.3KB
+- **Total Size of Merged Video:** 24.32KB
+- **Issue:** One of the video clips is corrupted.
 
 ```sh
 podman stats --format "table {{.Name}},{{.CPUPerc}},{{.MemUsage}}" video-buff-test >> "video-buff-stats.csv"
